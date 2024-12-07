@@ -109,9 +109,49 @@ def datoGraficoLineplot(dg: str, dat):
 
 # GRAFICO DISPLOT
 def datoGraficoDisplot(dg: str, dat):
-    plot = sns.displot(data=dat,x=dg, hue=dg, kind="kde", height=6, multiple="fill", clip=(0, None), palette="ch:rot=-.25,hue=1,light=.75",)
-    img_base64 = plot_to_base64(plot.figure)  # Convierte el gráfico a base64
-    return Img(src=f"data:image/png;base64,{img_base64}")  # Devuelve una etiqueta Img de FastHTML con la imagen en base64
+    # Validación de que las columnas existen
+    if dg not in dat.columns or "C203" not in dat.columns:
+        return Div(H2(f"No se encuentran las columnas necesarias para graficar {dg} contra C203", cls="text-red-500"))
+
+    # Limpieza de datos
+    data_clean = dat[[dg, "C203"]].dropna()  # Elimina filas con valores nulos
+    if data_clean.empty:
+        return Div(H2(f"No hay datos válidos para graficar {dg} contra C203", cls="text-red-500"))
+
+    # Asegurarse de que ambas columnas sean numéricas
+    for col in [dg, "C203"]:
+        if not pd.api.types.is_numeric_dtype(data_clean[col]):
+            try:
+                data_clean[col] = pd.to_numeric(data_clean[col], errors='coerce')  # Convertir a numérico
+                data_clean = data_clean.dropna()  # Eliminar nuevamente valores no numéricos
+            except Exception as e:
+                return Div(H2(f"Error al convertir los datos de {col} a numérico: {str(e)}", cls="text-red-500"))
+
+    if data_clean.empty:
+        return Div(H2(f"No se pudieron convertir los datos a numéricos para graficar {dg} contra C203", cls="text-red-500"))
+
+    # Crear el gráfico
+    plt.figure(figsize=(12, 8))  # Tamaño del gráfico
+    plot = sns.displot(
+        data=data_clean,
+        x=dg,
+        y="C203",  # Eje Y fijo
+        kind="kde",  # Usamos Kernel Density Estimation
+        fill=True,
+        height=6,
+        palette="Set2",
+    )
+
+    # Configuración del gráfico
+    plot.set_titles(f"Displot de {dg} contra C203", fontsize=16)  # Título del gráfico
+    plot.set_axis_labels(dg, "C203", fontsize=12)  # Etiquetas de los ejes
+    plot.figure.tight_layout()  # Ajustar márgenes
+
+    # Convertir gráfico a Base64
+    img_base64 = plot_to_base64(plot.figure)
+    return Img(src=f"data:image/png;base64,{img_base64}")  # Devuelve la imagen en Base64
+
+
 # -------------------------
 
 # @app.route("/")
@@ -130,5 +170,11 @@ def datoGraficoDisplot(dg: str, dat):
 
 # def datoGraficoLineplot(dg: str, dat):
 #     plot = sns.lineplot(x=dg, y='ANIO', hue=dg, style="ANIO", data=dat)  # Crea un histograma con Seaborn
+#     img_base64 = plot_to_base64(plot.figure)  # Convierte el gráfico a base64
+#     return Img(src=f"data:image/png;base64,{img_base64}")  # Devuelve una etiqueta Img de FastHTML con la imagen en base64
+
+
+# def datoGraficoDisplot(dg: str, dat):
+#     plot = sns.displot(data=dat,x=dg, hue=dg, kind="kde", height=6, multiple="fill", clip=(0, None), palette="ch:rot=-.25,hue=1,light=.75",)
 #     img_base64 = plot_to_base64(plot.figure)  # Convierte el gráfico a base64
 #     return Img(src=f"data:image/png;base64,{img_base64}")  # Devuelve una etiqueta Img de FastHTML con la imagen en base64

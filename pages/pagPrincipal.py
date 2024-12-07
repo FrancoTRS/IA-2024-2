@@ -155,6 +155,7 @@ def btnGrafica():
             cls="text-lg text-gray-100 p-6 text-center"
         ),
         cls="flex flex-col items-center space-y-4 justify-center p-4 pt-10 bg-gradient-to-r from-blue-900 to-purple-700",
+        id="section2"
     )
 
 
