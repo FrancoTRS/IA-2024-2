@@ -8,6 +8,8 @@ from pages.pagBoxplot import *
 from pages.pagLineplot import *
 from pages.pagDisplot import *
 
+#prueba completoa a ver
+
 # Incluir TailwindCSS
 tailwindcss = Link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css")
 app = FastHTML(hdrs=(tailwindcss,))
