@@ -42,7 +42,9 @@ def datoGraficoBoxplot(dg: str, dat):
 
     # Crear el gráfico
     plt.figure(figsize=(12, 8))
-    plot = sns.boxplot(x=dg, y='ESTRATO', data=data_clean, palette="Set3", showfliers=False)
+    plot = sns.boxplot(
+        x=dg, y='ESTRATO', data=data_clean, palette="Set3", showfliers=False
+    )
     plot.set_title(f"Boxplot de {dg} por ESTRATO", fontsize=16)
     plot.set_xlabel(dg, fontsize=12)
     plot.set_ylabel("Estrato", fontsize=12)
