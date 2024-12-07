@@ -3,8 +3,7 @@ from grafico import *
 from pages.common import *
 
 columnasSelecBoxplot = [
-    "ANIO", "C377", "CONGLOMERADO", "MUESTRA", "SELVIV", 
-    "ESTRATO", "AREA_ENCUESTA", "CCDD", "C203", "OCUP300", "C208"
+    "C208", "OCUP300", "C377", "C203"
 ]
 
 def seleccionBoxplot():

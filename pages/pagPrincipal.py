@@ -137,13 +137,22 @@ def seccion_graficos_referenciales():
 def btnGrafica():
     return Div(
         P(
-            "Explora los gráficos estadísticos de los Indicadores del Mercado Laboral y descubre las tendencias importantes.",
-            cls="text-lg text-gray-100 mb-4 text-center"
+            "Explora los gráficos estadísticos de los Indicadores del Mercado Laboral y descubre las tendencias importantes. Con estas visualizaciones, podrás comprender mejor la situación del empleo juvenil en distintas regiones de Perú, identificar patrones de desigualdad y tomar decisiones informadas para mejorar las oportunidades laborales.",
+            cls="text-lg text-gray-100 m-6 px-20 text-center"
         ),
         A(
-            "GRAFICAS",
+            "VER GRÁFICAS",
             href="/graficas",
-            cls="bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-purple-700 hover:shadow-lg transition-all duration-300"
+            cls="bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-800 hover:shadow-lg transition-all duration-300"
+        ),
+        Img(
+            src="https://th.bing.com/th/id/OIP.qhPLGJff20Q1tXQ_W0LW4wHaFT?rs=1&pid=ImgDetMain",  # Reemplaza con la URL de la imagen deseada
+            alt="Gráficos de mercado laboral",
+            cls="w-1/4 rounded-lg shadow-lg mt-6 pt-3"
+        ),
+        P(
+            "Utiliza las herramientas interactivas para explorar los datos y obtener insights significativos que pueden ayudarte a comprender mejor el mercado laboral en Perú.",
+            cls="text-lg text-gray-100 p-6 text-center"
         ),
         cls="flex flex-col items-center space-y-4 justify-center p-4 pt-10 bg-gradient-to-r from-blue-900 to-purple-700",
     )
