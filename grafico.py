@@ -16,22 +16,15 @@ def plot_to_base64(plot):
     img_base64 = base64.b64encode(buf.read()).decode('utf-8')  # Codifica la imagen en base64
     return img_base64  # Devuelve la imagen codificada en base64
 
+
+# GRAFICO HISPLOT
 def datoGraficoHisplot(dg: str, dat):
     plot = sns.histplot(dat[dg], kde=True, bins=4)  # Crea un histograma con Seaborn
     img_base64 = plot_to_base64(plot.figure)  # Convierte el gráfico a base64
     return Img(src=f"data:image/png;base64,{img_base64}")  # Devuelve una etiqueta Img de FastHTML con la imagen en base64
 
-def datoGraficoLineplot(dg: str, dat):
-    plot = sns.lineplot(x=dg, y='ANIO', hue=dg, style="ANIO", data=dat)  # Crea un histograma con Seaborn
-    img_base64 = plot_to_base64(plot.figure)  # Convierte el gráfico a base64
-    return Img(src=f"data:image/png;base64,{img_base64}")  # Devuelve una etiqueta Img de FastHTML con la imagen en base64
 
-def datoGraficoDisplot(dg: str, dat):
-    plot = sns.displot(data=dat,x=dg, hue=dg, kind="kde", height=6, multiple="fill", clip=(0, None), palette="ch:rot=-.25,hue=1,light=.75",)
-    img_base64 = plot_to_base64(plot.figure)  # Convierte el gráfico a base64
-    return Img(src=f"data:image/png;base64,{img_base64}")  # Devuelve una etiqueta Img de FastHTML con la imagen en base64
-
-
+# GRAFICO BOXPLOT
 def datoGraficoBoxplot(dg: str, dat):
     # Limpieza de datos específica para OCUP300
     if dg == 'OCUP300' and dg in dat.columns:
@@ -67,7 +60,18 @@ def datoGraficoBoxplot(dg: str, dat):
     return Img(src=f"data:image/png;base64,{img_base64}")  # Devuelve imagen Base64
 
 
+# GRAFICO LINEPLOT
+def datoGraficoLineplot(dg: str, dat):
+    plot = sns.lineplot(x=dg, y='ANIO', hue=dg, style="ANIO", data=dat)  # Crea un histograma con Seaborn
+    img_base64 = plot_to_base64(plot.figure)  # Convierte el gráfico a base64
+    return Img(src=f"data:image/png;base64,{img_base64}")  # Devuelve una etiqueta Img de FastHTML con la imagen en base64
 
+
+# GRAFICO DISPLOT
+def datoGraficoDisplot(dg: str, dat):
+    plot = sns.displot(data=dat,x=dg, hue=dg, kind="kde", height=6, multiple="fill", clip=(0, None), palette="ch:rot=-.25,hue=1,light=.75",)
+    img_base64 = plot_to_base64(plot.figure)  # Convierte el gráfico a base64
+    return Img(src=f"data:image/png;base64,{img_base64}")  # Devuelve una etiqueta Img de FastHTML con la imagen en base64
 # -------------------------
 
 # @app.route("/")

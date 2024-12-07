@@ -57,7 +57,6 @@ def tablaEjemplos():
         "SELVIV": "Número de selección de la vivienda",
         "ESTRATO": "Estrato Poblacional",
         "AREA_ENCUESTA": "Área de residencia",
-        "CCDD": "Código del departamento",
         "C203": "Cuál es la relación de parentesco con el jefe del hogar",
         "OCUP300": "Nivel de Ocupación",
         "C208": "Qué edad tiene en años cumplidos"
